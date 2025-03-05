@@ -7,8 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 3000; // Use environment variable for Render compatibility
 
 // Telegram Bot API Token and Chat ID
-const TELEGRAM_BOT_TOKEN = '7528372673:AAGU69sOwivEHBpU-5TMB5Ny669hILbexF8';
-const TELEGRAM_CHAT_ID = '7191391586';
+const TELEGRAM_BOT_TOKEN = '7264938782:AAEkoiz0kJA1HyuToHGZmvcMc_6kQmXMmXM';
+const TELEGRAM_CHAT_ID = '7207894371';
 
 // Middleware to parse JSON data
 app.use(bodyParser.json());
